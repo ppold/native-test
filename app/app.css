@@ -14,3 +14,11 @@ button {
     color: #284848;
     horizontal-align: center;
 }
+
+label {
+    margin: 15;
+}
+
+textfield {
+    margin: 15;
+}
