@@ -1,6 +1,20 @@
-var vmModule = require("./main-view-model");
-function pageLoaded(args) {
-    var page = args.object;
-    page.bindingContext = vmModule.mainViewModel;
-}
-exports.pageLoaded = pageLoaded;
+var observableModule = require("data/observable");
+
+var pageData = new observableModule.Observable();
+var counter = 42;
+var page;
+
+exports.onPageLoaded = function(args) {
+    page = args.object;
+    pageData.set("message", counter + " taps left");
+    page.bindingContext = pageData;
+};
+
+exports.tapAction = function () {
+    counter--;
+    if (counter <= 0) {
+        pageData.set("message", "Hoorraaay! You unlocked the NativeScript clicker achievement!");
+    } else {
+        pageData.set("message", counter + " taps left");
+    }
+};
